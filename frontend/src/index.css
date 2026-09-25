@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Iron-and-chalk palette for a lifting logbook. Values are hardcoded (not
+     layered through many indirection levels) so nothing can render at an
+     unintended low contrast. */
+  --bg: #f6f6f4;
+  --surface: #ffffff;
+  --border: #e3e3df;
+  --ink: #14151a;
+  --ink-dim: #62636b;
+  --ink-faint: #9a9ba1;
+  --blue: #3457e0;
+  --blue-bg: #eef1fd;
+  --red: #d6393e;
+  --shadow-sm: 0 1px 2px rgba(20, 21, 26, 0.05);
+  --shadow-md: 0 4px 16px rgba(20, 21, 26, 0.07);
+
+  --display: 'Oswald', 'Arial Narrow', sans-serif;
+  --body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: ui-monospace, 'SF Mono', Consolas, monospace;
+
+  color-scheme: light;
+  font: 16px/1.5 var(--body);
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  min-height: 100svh;
+}
+
+h1, h2, h3 {
+  font-family: var(--display);
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  color: #14151a;
+  opacity: 1;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  font-family: var(--body);
+}
