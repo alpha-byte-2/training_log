@@ -1,66 +1,26 @@
 # Training Log
 
-> A full-stack workout tracking application with JWT authentication, MySQL persistence, workout analytics, and an AI-powered coaching assistant.
+A full-stack workout tracking application with **JWT authentication, MySQL, workout analytics, and AI-powered coaching using Google Gemini**.
 
 ## Overview
 
-**Training Log** is a full-stack fitness application designed to help users record and analyze their strength-training sessions.
+**Training Log** is a full-stack fitness application that allows users to record and review their strength-training sessions.
 
-Users can create an account, securely log in, record exercises with weight, sets, and reps, review their training history, track basic workout statistics, and receive personalized coaching insights generated from their recent training data.
+Users can create an account, securely log in, record exercises with weight, sets, and reps, view their workout history, track training statistics, and get AI-generated insights based on their recent workouts.
 
-The project combines a **React + Vite frontend** with a **Node.js + Express backend**, **MySQL** for persistent storage, **JWT** for authentication, and **Google Gemini** for AI-powered coaching.
+### Core Features
 
----
-
-## Features
-
-### Authentication
-
-* User registration
-* Secure password hashing with bcrypt
+* User registration and login
+* Password hashing with bcrypt
 * JWT-based authentication
-* Protected API routes
-* Persistent login using browser local storage
-* Logout functionality
-
-### Workout Tracking
-
-* Add exercises to your training log
-* Record:
-
-  * Exercise name
-  * Weight
-  * Sets
-  * Reps
-* View recent workout sessions
-* Automatically associate workouts with the authenticated user
-
-### Training Statistics
-
-The dashboard provides:
-
-* **Sessions Logged** — total number of recorded sessions
-* **Day Streak** — consecutive training days
-* **Total Volume** — calculated using:
-
-```text
-Weight × Sets × Reps
-```
-
-### AI Coach
-
-The application includes an AI coaching feature powered by **Google Gemini**.
-
-The AI analyzes recent workout history and provides a short, specific coaching insight based on the user's logged numbers.
-
-It can identify patterns such as:
-
-* Progressive overload
-* Stalled lifts
-* Volume imbalance
-* Other noticeable patterns in recent training
-
-The backend sends the latest 20 workout records to the AI coach for analysis.
+* Protected backend routes
+* Workout logging
+* Workout history
+* Training statistics
+* Workout day streak
+* Total training volume
+* AI-powered coaching with Google Gemini
+* Responsive React interface
 
 ---
 
@@ -68,52 +28,53 @@ The backend sends the latest 20 workout records to the AI coach for analysis.
 
 ### Frontend
 
-| Technology   | Purpose                           |
-| ------------ | --------------------------------- |
-| React        | UI development                    |
-| Vite         | Development server and build tool |
-| React Router | Client-side routing               |
-| Axios        | API communication                 |
-| CSS          | Styling and responsive UI         |
+* **React 19**
+* **Vite**
+* **React Router**
+* **Axios**
+* **CSS**
 
 ### Backend
 
-| Technology     | Purpose               |
-| -------------- | --------------------- |
-| Node.js        | JavaScript runtime    |
-| Express.js     | REST API              |
-| MySQL          | Database              |
-| mysql2         | MySQL database driver |
-| bcrypt         | Password hashing      |
-| JSON Web Token | Authentication        |
-| CORS           | Cross-origin requests |
-| dotenv         | Environment variables |
-| Google Gemini  | AI coaching           |
+* **Node.js**
+* **Express.js**
+* **MySQL**
+* **mysql2**
+* **bcrypt**
+* **JSON Web Token**
+* **CORS**
+* **dotenv**
+* **Google Gemini API**
 
 ---
 
 ## Architecture
 
 ```text
-                    ┌─────────────────────┐
-                    │      React UI       │
-                    │     + Vite          │
-                    └──────────┬──────────┘
-                               │
-                               │ Axios / REST API
-                               ▼
-                    ┌─────────────────────┐
-                    │   Express Server    │
-                    │      Node.js        │
-                    └──────────┬──────────┘
-                               │
-              ┌────────────────┼────────────────┐
-              │                │                │
-              ▼                ▼                ▼
-        ┌──────────┐      ┌──────────┐    ┌────────────┐
-        │  MySQL   │      │   JWT    │    │  Gemini AI │
-        │ Database │      │   Auth   │    │   Coach    │
-        └──────────┘      └──────────┘    └────────────┘
+┌──────────────────────┐
+│      React + Vite    │
+│       Frontend       │
+└──────────┬───────────┘
+           │
+           │ Axios / REST API
+           ▼
+┌──────────────────────┐
+│   Node.js + Express   │
+│       Backend        │
+└──────┬───────┬───────┘
+       │       │
+       │       │
+       ▼       ▼
+┌──────────┐ ┌──────────────┐
+│  MySQL   │ │  Gemini AI   │
+│ Database │ │    Coach     │
+└──────────┘ └──────────────┘
+       │
+       ▼
+┌──────────────────────┐
+│    JWT Middleware    │
+│  Protected Routes    │
+└──────────────────────┘
 ```
 
 ---
@@ -125,29 +86,24 @@ training_log/
 │
 ├── backend/
 │   ├── package.json
+│   ├── package-lock.json
 │   └── server.js
 │
-└── frontend/
-    ├── public/
-    │   ├── favicon.svg
-    │   └── icons.svg
-    │
-    ├── src/
-    │   ├── assets/
-    │   │   ├── hero.png
-    │   │   ├── react.svg
-    │   │   └── vite.svg
-    │   │
-    │   ├── App.css
-    │   ├── App.jsx
-    │   ├── index.css
-    │   └── main.jsx
-    │
-    ├── .gitignore
-    ├── .oxlintrc.json
-    ├── index.html
-    ├── package.json
-    └── vite.config.js
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── assets/
+│   │   ├── App.css
+│   │   ├── App.jsx
+│   │   ├── index.css
+│   │   └── main.jsx
+│   │
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── index.html
+│   └── vite.config.js
+│
+└── README.md
 ```
 
 ---
@@ -156,9 +112,9 @@ training_log/
 
 ## Prerequisites
 
-Make sure you have the following installed:
+Make sure you have installed:
 
-* Node.js
+* [Node.js](https://nodejs.org/)
 * npm
 * MySQL
 * Git
@@ -169,13 +125,13 @@ Make sure you have the following installed:
 ## 1. Clone the Repository
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/alpha-byte-2/training_log.git
 cd training_log
 ```
 
 ---
 
-## 2. Configure the Backend
+## 2. Backend Setup
 
 Navigate to the backend:
 
@@ -205,21 +161,21 @@ PORT=5000
 
 ### Environment Variables
 
-| Variable         | Description              |
-| ---------------- | ------------------------ |
-| `DB_HOST`        | MySQL server host        |
-| `DB_USER`        | MySQL username           |
-| `DB_PASSWORD`    | MySQL password           |
-| `DB_NAME`        | MySQL database name      |
-| `JWT_SECRET`     | Secret used to sign JWTs |
-| `GEMINI_API_KEY` | Google Gemini API key    |
-| `PORT`           | Backend server port      |
+| Variable         | Description                 |
+| ---------------- | --------------------------- |
+| `DB_HOST`        | MySQL server host           |
+| `DB_USER`        | MySQL username              |
+| `DB_PASSWORD`    | MySQL password              |
+| `DB_NAME`        | MySQL database name         |
+| `JWT_SECRET`     | Secret used for JWT signing |
+| `GEMINI_API_KEY` | Google Gemini API key       |
+| `PORT`           | Backend server port         |
 
-> Never commit your `.env` file or API keys to GitHub.
+> **Important:** Never commit your `.env` file, database password, JWT secret, or Gemini API key to GitHub.
 
 ---
 
-## 3. Configure MySQL
+# Database Setup
 
 Create the database:
 
@@ -227,19 +183,25 @@ Create the database:
 CREATE DATABASE training_log;
 ```
 
-The backend expects `users` and `workouts` tables.
-
-Example schema:
+Select the database:
 
 ```sql
 USE training_log;
+```
 
+Create the `users` table:
+
+```sql
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL
 );
+```
 
+Create the `workouts` table:
+
+```sql
 CREATE TABLE workouts (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -254,7 +216,9 @@ CREATE TABLE workouts (
 
 ---
 
-## 4. Start the Backend
+# Running the Application
+
+## Start Backend
 
 From the `backend` directory:
 
@@ -262,7 +226,7 @@ From the `backend` directory:
 node server.js
 ```
 
-Or use Nodemon during development:
+For development:
 
 ```bash
 npx nodemon server.js
@@ -276,9 +240,9 @@ http://localhost:5000
 
 ---
 
-## 5. Start the Frontend
+## Start Frontend
 
-Open another terminal:
+Open a new terminal:
 
 ```bash
 cd frontend
@@ -296,7 +260,7 @@ Start the development server:
 npm run dev
 ```
 
-Vite will provide a local development URL, typically:
+The frontend will normally be available at:
 
 ```text
 http://localhost:5173
@@ -314,7 +278,7 @@ http://localhost:5173
 POST /api/auth/register
 ```
 
-Request body:
+Request:
 
 ```json
 {
@@ -339,7 +303,7 @@ Response:
 POST /api/auth/login
 ```
 
-Request body:
+Request:
 
 ```json
 {
@@ -348,7 +312,7 @@ Request body:
 }
 ```
 
-The server returns a JWT token:
+Response:
 
 ```json
 {
@@ -357,6 +321,8 @@ The server returns a JWT token:
   "username": "john"
 }
 ```
+
+The frontend stores the returned JWT and uses it for authenticated requests.
 
 ---
 
@@ -374,7 +340,7 @@ Authentication:
 Authorization: Bearer <token>
 ```
 
-Request body:
+Request:
 
 ```json
 {
@@ -403,7 +369,7 @@ Returns the authenticated user's workout history.
 
 ---
 
-# AI Coach API
+# AI Coach
 
 ## Get Coaching Insight
 
@@ -417,32 +383,59 @@ Authentication:
 Authorization: Bearer <token>
 ```
 
-The backend retrieves the user's most recent workout records and sends the training data to Gemini.
+The backend retrieves the user's recent workout history and sends it to Google Gemini for analysis.
 
-Example response:
+The AI coach is designed to identify specific patterns in the training data, such as:
 
-```json
-{
-  "insight": "Your deadlift volume has increased consistently over your last few sessions. Consider maintaining the current weight for another session while focusing on consistent reps before increasing the load."
-}
+* Progressive overload
+* Stalled exercises
+* Volume imbalance
+* Other noticeable training patterns
+
+It then returns a short coaching insight with an actionable next step.
+
+---
+
+# Training Statistics
+
+The dashboard calculates three basic statistics.
+
+### Sessions Logged
+
+Total number of workouts recorded by the user.
+
+### Day Streak
+
+Tracks consecutive days on which workouts were logged.
+
+### Total Volume
+
+Calculated as:
+
+```text
+Weight × Sets × Reps
 ```
 
-The AI coach is configured to provide a short paragraph containing a specific observation and an actionable next step.
+For example:
+
+```text
+100 kg × 3 sets × 5 reps = 1500 kg
+```
 
 ---
 
 # Authentication Flow
 
 ```text
-Register
-   │
-   ▼
+User Registration
+       │
+       ▼
 Password
-   │
-   ▼
+       │
+       ▼
 bcrypt Hash
-   │
-   ▼
+       │
+       ▼
 MySQL
 ```
 
@@ -450,21 +443,21 @@ Login:
 
 ```text
 Username + Password
-        │
-        ▼
-     MySQL
-        │
-        ▼
+       │
+       ▼
+   MySQL User
+       │
+       ▼
 bcrypt Verification
-        │
-        ▼
+       │
+       ▼
       JWT
-        │
-        ▼
+       │
+       ▼
 Frontend localStorage
 ```
 
-For protected requests:
+Protected request:
 
 ```text
 Frontend
@@ -480,132 +473,103 @@ JWT Verification
 req.userId
    │
    ▼
-Protected API Route
+Protected API
+   │
+   ▼
+MySQL
 ```
 
 ---
 
-# Application Flow
+# Frontend Scripts
 
-```text
-              ┌──────────────┐
-              │ Authentication│
-              └──────┬───────┘
-                     │
-                     ▼
-              ┌──────────────┐
-              │  Dashboard   │
-              └──────┬───────┘
-                     │
-          ┌──────────┼──────────┐
-          │          │          │
-          ▼          ▼          ▼
-       Log Set    Statistics   AI Coach
-          │          │          │
-          └──────────┼──────────┘
-                     ▼
-              Workout History
-```
+From the `frontend` directory:
 
----
-
-# NPM Scripts
-
-## Frontend
+### Development
 
 ```bash
 npm run dev
 ```
 
-Start the development server.
+### Production Build
 
 ```bash
 npm run build
 ```
 
-Create a production build.
+### Preview Production Build
 
 ```bash
 npm run preview
 ```
 
-Preview the production build.
+### Lint
 
 ```bash
 npm run lint
 ```
 
-Run Oxlint.
-
 ---
 
 # Security
 
-The application implements several basic security mechanisms:
+The application currently uses:
 
-* Passwords are hashed using bcrypt before storage.
-* Protected endpoints require JWT authentication.
-* JWT tokens contain the authenticated user's ID.
-* Database queries use parameterized values.
-* Sensitive configuration is loaded through environment variables.
-* API keys are not intended to be stored in frontend code.
+* bcrypt password hashing
+* JWT authentication
+* Protected API endpoints
+* Parameterized SQL queries
+* Environment variables for sensitive configuration
+* CORS configuration
+* Authorization headers for protected requests
 
----
+### Environment Variables
 
-# Current Limitations
-
-The current version focuses on the core workout logging experience.
-
-Potential future additions include:
-
-* Edit workouts
-* Delete workouts
-* Exercise-specific progress charts
-* Personal records
-* Weekly and monthly analytics
-* Workout programs
-* User profiles
-* Refresh-token authentication
-* More detailed AI coaching
-* Production deployment
-* Improved database validation
-
----
-
-# Future Roadmap
+Sensitive values such as:
 
 ```text
-[x] User Authentication
-[x] JWT Authorization
-[x] Workout Logging
-[x] Workout History
-[x] Training Statistics
-[x] Gemini AI Coach
-[ ] Workout Editing
-[ ] Workout Deletion
-[ ] Progress Charts
-[ ] Personal Records
-[ ] Workout Programs
-[ ] Production Deployment
+DB_PASSWORD
+JWT_SECRET
+GEMINI_API_KEY
 ```
+
+should remain in `.env` and should never be committed to the repository.
 
 ---
 
-# Learning Objectives
+# Future Improvements
 
-This project demonstrates practical implementation of:
+Planned improvements include:
 
-* React component development
-* React state and lifecycle management
-* Client-side routing
+* [ ] Edit workouts
+* [ ] Delete workouts
+* [ ] Exercise-specific progress charts
+* [ ] Personal records
+* [ ] Weekly and monthly analytics
+* [ ] Workout programs
+* [ ] User profile
+* [ ] Refresh-token authentication
+* [ ] More advanced AI coaching
+* [ ] Production deployment
+
+---
+
+# Learning Outcomes
+
+This project demonstrates practical experience with:
+
+* React development
+* React state management
+* React Router
 * REST API development
-* Express middleware
+* Express.js
+* Middleware
 * JWT authentication
 * Password hashing
 * MySQL database integration
-* Protected API endpoints
-* Axios API communication
-* Environment variable management
+* SQL queries
+* Axios
+* Environment variables
 * AI API integration
 * Full-stack application architecture
 
@@ -615,10 +579,12 @@ This project demonstrates practical implementation of:
 
 **Aman Choudhary**
 
-Built as a full-stack development project to practice modern web development, backend authentication, database integration, and AI-powered application features.
+GitHub: [@alpha-byte-2](https://github.com/alpha-byte-2)
+
+Repository: [training_log](https://github.com/alpha-byte-2/training_log)
 
 ---
 
 ## License
 
-This project is for educational and development purposes.
+This project is created for educational and development purposes.
